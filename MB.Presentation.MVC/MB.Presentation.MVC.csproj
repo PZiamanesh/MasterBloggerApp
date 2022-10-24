@@ -53,4 +53,8 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MB.Application.Contracts\MB.Application.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>
