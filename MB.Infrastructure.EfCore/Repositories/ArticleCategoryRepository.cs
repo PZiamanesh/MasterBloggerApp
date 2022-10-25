@@ -1,4 +1,5 @@
 ﻿using MB.Domain.ArticleCategoryAgg;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MB.Infrastructure.EfCore.Repositories;
 

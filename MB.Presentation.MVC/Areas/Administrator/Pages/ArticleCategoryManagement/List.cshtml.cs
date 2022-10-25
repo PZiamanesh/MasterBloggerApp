@@ -6,6 +6,7 @@ namespace MB.Presentation.MVC.Areas.Administrator.Pages.ArticleCategoryManagemen
 public class ListModel : PageModel
 {
     private readonly IArticleCategoryApplication _articleCategoryApplication;
+
     public List<ArticleCategoryViewModel> ArticleCategories { get; set; }
 
     public ListModel(IArticleCategoryApplication articleCategoryApplication)
