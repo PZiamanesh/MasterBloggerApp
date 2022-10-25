@@ -16,6 +16,7 @@ public class ListModel : PageModel
 
     public void OnGet()
     {
-        ArticleCategories = _articleCategoryApplication.List();
+        Console.WriteLine("hello there!");
+        //ArticleCategories = _articleCategoryApplication.List();
     }
 }
