@@ -14,7 +14,7 @@ public class ArticleCategoryRepository : IArticleCategoryRepository
 
     public List<ArticleCategory> GetAll()
     {
-        return _dbContext.ArticleCategories.ToList();
+        return _dbContext.ArticleCategories.OrderByDescending(x=>x.Id).ToList();
     }
 
     public void Add(ArticleCategory entity)
