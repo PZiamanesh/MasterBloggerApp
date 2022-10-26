@@ -38,6 +38,9 @@
                             }
                         </td>
                         <td>@articleCategory.CreationDate</td>
+                        <td>
+                            <a class="btn btn-warning" asp-route-id="@articleCategory.Id" asp-page="./Rename">Rename</a>
+                        </td>
                     </tr>
                 }
             </tbody>

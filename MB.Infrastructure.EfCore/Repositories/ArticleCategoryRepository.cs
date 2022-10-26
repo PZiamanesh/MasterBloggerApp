@@ -1,5 +1,4 @@
 ﻿using MB.Domain.ArticleCategoryAgg;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace MB.Infrastructure.EfCore.Repositories;
 
@@ -14,12 +13,22 @@ public class ArticleCategoryRepository : IArticleCategoryRepository
 
     public List<ArticleCategory> GetAll()
     {
-        return _dbContext.ArticleCategories.OrderByDescending(x=>x.Id).ToList();
+        return _dbContext.ArticleCategories.OrderByDescending(x => x.Id).ToList();
     }
 
     public void Add(ArticleCategory entity)
     {
         _dbContext.Add(entity);
+        Save();
+    }
+
+    public ArticleCategory Get(long id)
+    {
+        return _dbContext.ArticleCategories.Find(id);
+    }
+
+    public void Save()
+    {
         _dbContext.SaveChanges();
     }
 }

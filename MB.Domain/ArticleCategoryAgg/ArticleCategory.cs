@@ -13,4 +13,16 @@ public class ArticleCategory
         IsDeleted = false;
         CreationDate = DateTime.Now;
     }
+
+    public void Edit(string title)
+    {
+        if (string.IsNullOrEmpty(title))
+        {
+            this.Title = "N/A";
+        }
+        else
+        {
+            this.Title = title;
+        }
+    }
 }
