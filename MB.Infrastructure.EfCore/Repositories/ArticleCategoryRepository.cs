@@ -17,9 +17,9 @@ public class ArticleCategoryRepository : IArticleCategoryRepository
         return _dbContext.ArticleCategories.ToList();
     }
 
-    public void Create(ArticleCategory entity)
+    public void Add(ArticleCategory entity)
     {
-        _dbContext.ArticleCategories.Add(entity);
+        _dbContext.Add(entity);
         _dbContext.SaveChanges();
     }
 }
