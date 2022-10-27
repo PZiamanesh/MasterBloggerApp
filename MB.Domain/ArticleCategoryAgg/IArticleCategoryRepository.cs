@@ -6,4 +6,5 @@ public interface IArticleCategoryRepository
     void Add(ArticleCategory entity);
     ArticleCategory Get(long id);
     void Save();
+    bool Exists(string title);
 }

@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="card-body">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover table-responsive-lg">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -38,8 +38,28 @@
                             }
                         </td>
                         <td>@articleCategory.CreationDate</td>
-                        <td>
-                            <a class="btn btn-warning" asp-route-id="@articleCategory.Id" asp-page="./Rename">Rename</a>
+                        <td class="row no-gutters">
+                            <div class="col mb-1">
+                                <a class="btn btn-warning btn-sm" asp-route-id="@articleCategory.Id" asp-page="./Rename">Rename</a>
+                            </div>
+                            @if (articleCategory.IsDeleted)
+                            {
+                                <div class="col mb-1">
+                                    <form method="post" asp-page-handler="Activate">
+                                        <button class="btn btn-success btn-sm">Activate</button>
+                                        <input type="hidden" name="id" value="@articleCategory.Id" />
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col mb-1">
+                                    <form method="post" asp-page-handler="Remove">
+                                        <button class="btn btn-danger btn-sm">Remove</button>
+                                        <input type="hidden" name="id" value="@articleCategory.Id" />
+                                    </form>
+                                </div>
+                            }
                         </td>
                     </tr>
                 }

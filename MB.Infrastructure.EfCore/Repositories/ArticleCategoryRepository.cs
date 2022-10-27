@@ -31,4 +31,9 @@ public class ArticleCategoryRepository : IArticleCategoryRepository
     {
         _dbContext.SaveChanges();
     }
+
+    public bool Exists(string title)
+    {
+        return _dbContext.ArticleCategories.Any(x => x.Title == title);
+    }
 }
