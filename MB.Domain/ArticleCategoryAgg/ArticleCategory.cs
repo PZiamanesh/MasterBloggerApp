@@ -5,14 +5,19 @@ namespace MB.Domain.ArticleCategoryAgg;
 public class ArticleCategory
 {
     public long Id { get; private set; }
-    public string? Title { get; private set; }
+    public string Title { get; private set; }
     public bool IsDeleted { get; private set; }
     public DateTime CreationDate { get; private set; }
 
+    protected ArticleCategory()
+    {
+    }
+
     public ArticleCategory(string title, IArticleCategoryValidatorService validatorService)
     {
-        validatorService.IsTitleExists(title);
         GuardAgainstEmptyTitle(title);
+        validatorService.CheckTitleExistence(title);
+
         IsDeleted = false;
         CreationDate = DateTime.Now;
     }
@@ -34,6 +39,8 @@ public class ArticleCategory
 
     private void GuardAgainstEmptyTitle(string title)
     {
-        this.Title = string.IsNullOrEmpty(title) ? throw new ArgumentNullException(): title;
+        this.Title = string.IsNullOrWhiteSpace(title)
+            ? throw new ArgumentNullException(title, "ArticleCategory has no title.")
+            : title;
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IArticleCategoryValidatorService
 {
-    bool IsTitleExists(string title);
+    void CheckTitleExistence(string title);
 }

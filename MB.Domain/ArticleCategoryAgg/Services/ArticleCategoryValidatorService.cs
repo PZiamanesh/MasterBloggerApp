@@ -1,6 +1,6 @@
 ﻿namespace MB.Domain.ArticleCategoryAgg.Services;
 
-class ArticleCategoryValidatorService : IArticleCategoryValidatorService
+public class ArticleCategoryValidatorService : IArticleCategoryValidatorService
 {
     private readonly IArticleCategoryRepository _articleCategoryRepository;
 
@@ -9,10 +9,11 @@ class ArticleCategoryValidatorService : IArticleCategoryValidatorService
         _articleCategoryRepository = articleCategoryRepository;
     }
 
-    public bool IsTitleExists(string title)
+    public void CheckTitleExistence(string title)
     {
-        return _articleCategoryRepository.Exists(title)
-            ? true
-            : throw new InvalidOperationException("A record with this title already exists.");
+        if (!_articleCategoryRepository.Exists(title))
+        {
+            throw new InvalidOperationException();
+        }
     }
 }

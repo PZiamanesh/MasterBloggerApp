@@ -23,7 +23,7 @@ public class ArticleCategoryApplication : IArticleCategoryApplication
             Title = x.Title,
             CreationDate = x.CreationDate.ToString(),
             IsDeleted = x.IsDeleted
-        }).ToList();
+        }).ToList(); ;
     }
 
     public void Create(CreateArticleCategory command)
