@@ -1,4 +1,6 @@
-﻿namespace MB.Domain.ArticleCategoryAgg.Services;
+﻿using MB.Domain.ArticleCategoryAgg.Exceptions;
+
+namespace MB.Domain.ArticleCategoryAgg.Services;
 
 public class ArticleCategoryValidatorService : IArticleCategoryValidatorService
 {
@@ -13,7 +15,7 @@ public class ArticleCategoryValidatorService : IArticleCategoryValidatorService
     {
         if (!_articleCategoryRepository.Exists(title))
         {
-            throw new InvalidOperationException();
+            throw new DuplicatedRecordException("A record with the same name exists in dataBase.");
         }
     }
 }
