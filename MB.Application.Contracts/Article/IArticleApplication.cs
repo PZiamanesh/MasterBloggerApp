@@ -2,4 +2,5 @@
 
 public interface IArticleApplication
 {
+    List<ArticleViewModel> List();
 }
