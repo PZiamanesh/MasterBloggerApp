@@ -1,4 +1,5 @@
-﻿using MB.Application.Contracts.ArticleCategory;
+﻿using System.Globalization;
+using MB.Application.Contracts.ArticleCategory;
 using MB.Domain.ArticleCategoryAgg;
 using MB.Domain.ArticleCategoryAgg.Services;
 
@@ -20,22 +21,22 @@ public class ArticleCategoryApplication : IArticleCategoryApplication
         return _articleCategoryRepository.GetAll().Select(x => new ArticleCategoryViewModel()
         {
             Id = x.Id,
-            Title = x.Title,
-            CreationDate = x.CreationDate.ToString(),
+            Title = x.Title ?? "N/A",
+            CreationDate = x.CreationDate.ToString(CultureInfo.InvariantCulture),
             IsDeleted = x.IsDeleted
         }).ToList(); ;
     }
 
     public void Create(CreateArticleCategory command)
     {
-        var articleCategory = new ArticleCategory(command.Title, _articleCategoryValidatorService);
+        var articleCategory = new ArticleCategory(command.Title!, _articleCategoryValidatorService);
         _articleCategoryRepository.Add(articleCategory);
     }
 
     public void Rename(RenameArticleCategory command)
     {
         var articleCategory = _articleCategoryRepository.Get(command.Id);
-        articleCategory.Edit(command.Title);
+        articleCategory.Edit(command.Title ?? "_Not Specified at Edit");
         _articleCategoryRepository.Save();
     }
 

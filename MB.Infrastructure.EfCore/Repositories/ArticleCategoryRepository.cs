@@ -24,7 +24,7 @@ public class ArticleCategoryRepository : IArticleCategoryRepository
 
     public ArticleCategory Get(long id)
     {
-        return _dbContext.ArticleCategories.Find(id);
+        return _dbContext.ArticleCategories.Find(id) ?? _dbContext.ArticleCategories.First();
     }
 
     public void Save()
