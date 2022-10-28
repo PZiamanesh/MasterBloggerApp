@@ -1,4 +1,5 @@
-﻿using MB.Domain.ArticleCategoryAgg.Services;
+﻿using MB.Domain.ArticleAgg;
+using MB.Domain.ArticleCategoryAgg.Services;
 
 namespace MB.Domain.ArticleCategoryAgg;
 
@@ -8,6 +9,9 @@ public class ArticleCategory
     public string? Title { get; private set; }
     public bool IsDeleted { get; private set; }
     public DateTime CreationDate { get; private set; }
+
+    // Reference relations
+    public List<Article> Articles { get; private set; }
 
     protected ArticleCategory()
     {
@@ -20,6 +24,7 @@ public class ArticleCategory
 
         IsDeleted = false;
         CreationDate = DateTime.Now;
+        Articles = new List<Article>();
     }
 
     public void Edit(string title)
