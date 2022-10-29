@@ -26,4 +26,10 @@ public class ArticleRepository : IArticleRepository
             IsDeleted = x.IsDeleted
         }).ToList();
     }
+
+    public void Create(Article entity)
+    {
+        _dbContext.Articles.Add(entity);
+        _dbContext.SaveChanges();
+    }
 }

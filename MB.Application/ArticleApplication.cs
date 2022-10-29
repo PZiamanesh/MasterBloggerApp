@@ -16,4 +16,14 @@ public class ArticleApplication : IArticleApplication
     {
         return _articleRepository.GetAll();
     }
+
+    public void CreateArticle(CreateNewArticle command)
+    {
+        var article = new Article(command.Title,
+            command.ShortDescription,
+            command.Image,
+            command.Content,
+            command.ArticleCategoryId);
+        _articleRepository.Create(article);
+    }
 }
