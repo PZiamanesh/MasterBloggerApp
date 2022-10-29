@@ -6,4 +6,6 @@ public interface IArticleRepository
 {
     List<ArticleViewModel> GetAll();
     void Create(Article entity);
+    Article Get(long id);
+    void Save();
 }
