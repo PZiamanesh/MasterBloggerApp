@@ -56,6 +56,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MB.Application.Contracts\MB.Application.Contracts.csproj" />
     <ProjectReference Include="..\MB.Infrastructure.IOC\MB.Infrastructure.IOC.csproj" />
+    <ProjectReference Include="..\MB.Infrastructure.Query\MB.Infrastructure.Query.csproj" />
   </ItemGroup>
 
 </Project>

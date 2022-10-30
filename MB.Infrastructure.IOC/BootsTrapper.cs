@@ -7,6 +7,7 @@ using MB.Domain.ArticleCategoryAgg;
 using MB.Domain.ArticleCategoryAgg.Services;
 using MB.Infrastructure.EfCore;
 using MB.Infrastructure.EfCore.Repositories;
+using MB.Infrastructure.Query;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,5 +29,7 @@ public class BootsTrapper
         services.AddScoped<IArticleApplication, ArticleApplication>();
         services.AddScoped<IArticleRepository, ArticleRepository>();
         services.AddScoped<IArticleValidatorService, ArticleValidatorService>();
+
+        services.AddScoped<IArticleQuery, ArticleQuery>();
     }
 }

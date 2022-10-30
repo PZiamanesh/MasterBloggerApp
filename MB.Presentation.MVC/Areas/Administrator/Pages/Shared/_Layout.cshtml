@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Main Site</a>
+                            <a class="nav-link" asp-area="Administrator" asp-page="/Index">Admin Panel</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -32,6 +32,9 @@
                                 <a class="dropdown-item" asp-area="Administrator" asp-page="/ArticleCategoryManagement/List">Article Category</a>
                                 <a class="dropdown-item" asp-area="Administrator" asp-page="/ArticleManagement/List">Article</a>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="btn btn-info btn-sm mt-1 ml-3" asp-area="" asp-page="/Index">Main Site</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
