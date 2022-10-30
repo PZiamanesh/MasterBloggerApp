@@ -1,4 +1,5 @@
-﻿using MB.Domain.ArticleCategoryAgg;
+﻿using MB.Domain.ArticleAgg.Services;
+using MB.Domain.ArticleCategoryAgg;
 
 namespace MB.Domain.ArticleAgg;
 
@@ -20,15 +21,28 @@ public class Article
     {
     }
 
-    public Article(string title, string shortDescription, string image, string content, long articleCategoryId)
+    public Article(string title,
+        string shortDescription,
+        string image,
+        string content,
+        long articleCategoryId,
+        IArticleValidatorService articleValidator)
     {
-        Title = title;
+        Validate(title, articleCategoryId);
+        articleValidator.IsArticleTitleDuplicated(title);
+
         ShortDescription = shortDescription;
         Image = image;
         Content = content;
-        ArticleCategoryId = articleCategoryId;
         IsDeleted = false;
         CreationDate = DateTime.Now;
+    }
+
+    private void Validate(string title, long articleCategoryId)
+    {
+        Title = string.IsNullOrWhiteSpace(title) ? throw new ArgumentNullException() : title;
+
+        ArticleCategoryId = articleCategoryId == 0 ? throw new ArgumentOutOfRangeException() : articleCategoryId;
     }
 
     public void Edit(string title, string shortDescription, string image, string content, long categoryId)
@@ -38,5 +52,15 @@ public class Article
         Image = image;
         Content = content;
         ArticleCategoryId = categoryId;
+    }
+
+    public void Remove()
+    {
+        IsDeleted = true;
+    }
+
+    public void Activate()
+    {
+        IsDeleted = false;
     }
 }

@@ -6,4 +6,6 @@ public interface IArticleApplication
     void CreateArticle(CreateNewArticle command);
     EditArticle GetArticle(long id);
     void EditArticle(EditArticle command);
+    void RemoveArticle(long id);
+    void ActivateArticle(long id);
 }

@@ -1,15 +1,18 @@
 ﻿using MB.Application.Contracts.Article;
 using MB.Domain.ArticleAgg;
+using MB.Domain.ArticleAgg.Services;
 
 namespace MB.Application;
 
 public class ArticleApplication : IArticleApplication
 {
     private readonly IArticleRepository _articleRepository;
+    private readonly IArticleValidatorService _articleValidatorService;
 
-    public ArticleApplication(IArticleRepository articleRepository)
+    public ArticleApplication(IArticleRepository articleRepository, IArticleValidatorService articleValidatorService)
     {
         _articleRepository = articleRepository;
+        _articleValidatorService = articleValidatorService;
     }
 
     public List<ArticleViewModel> List()
@@ -23,7 +26,8 @@ public class ArticleApplication : IArticleApplication
             command.ShortDescription,
             command.Image,
             command.Content,
-            command.ArticleCategoryId);
+            command.ArticleCategoryId,
+            _articleValidatorService);
 
         _articleRepository.Create(article);
     }
@@ -51,6 +55,20 @@ public class ArticleApplication : IArticleApplication
             command.Content,
             command.ArticleCategoryId);
 
+        _articleRepository.Save();
+    }
+
+    public void RemoveArticle(long id)
+    {
+        var article = _articleRepository.Get(id);
+        article.Remove();
+        _articleRepository.Save();
+    }
+
+    public void ActivateArticle(long id)
+    {
+        var article = _articleRepository.Get(id);
+        article.Activate();
         _articleRepository.Save();
     }
 }

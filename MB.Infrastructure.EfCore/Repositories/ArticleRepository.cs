@@ -42,4 +42,9 @@ public class ArticleRepository : IArticleRepository
     {
         _dbContext.SaveChanges();
     }
+
+    public bool IsArticleExist(string title)
+    {
+        return _dbContext.Articles.Any(x => x.Title.Equals(title));
+    }
 }

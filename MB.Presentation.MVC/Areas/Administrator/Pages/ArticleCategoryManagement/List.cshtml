@@ -38,27 +38,21 @@
                             }
                         </td>
                         <td>@articleCategory.CreationDate</td>
-                        <td class="row no-gutters">
-                            <div class="col mb-1">
-                                <a class="btn btn-warning btn-sm" asp-route-id="@articleCategory.Id" asp-page="./Rename">Rename</a>
-                            </div>
+                        <td>
+                            <a class="btn btn-warning btn-sm" asp-route-id="@articleCategory.Id" asp-page="./Rename">Rename</a>
                             @if (articleCategory.IsDeleted)
                             {
-                                <div class="col mb-1">
-                                    <form method="post" asp-page-handler="Activate">
-                                        <button class="btn btn-success btn-sm">Activate</button>
-                                        <input type="hidden" name="id" value="@articleCategory.Id" />
-                                    </form>
-                                </div>
+                                <form class="float-left mr-2" method="post" asp-page-handler="Activate">
+                                    <button class="btn btn-success btn-sm">Activate</button>
+                                    <input type="hidden" name="id" value="@articleCategory.Id"/>
+                                </form>
                             }
                             else
                             {
-                                <div class="col mb-1">
-                                    <form method="post" asp-page-handler="Remove">
-                                        <button class="btn btn-danger btn-sm">Remove</button>
-                                        <input type="hidden" name="id" value="@articleCategory.Id" />
-                                    </form>
-                                </div>
+                                <form class="float-left mr-2" method="post" asp-page-handler="Remove">
+                                    <button class="btn btn-danger btn-sm">Remove</button>
+                                    <input type="hidden" name="id" value="@articleCategory.Id"/>
+                                </form>
                             }
                         </td>
                     </tr>
