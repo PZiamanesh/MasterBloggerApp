@@ -40,6 +40,7 @@ public class Article
         Content = content;
         IsDeleted = false;
         CreationDate = DateTime.Now;
+        Comments = new List<Comment>();
     }
 
     private void Validate(string title, long articleCategoryId)

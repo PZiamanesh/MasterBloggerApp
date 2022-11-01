@@ -8,7 +8,7 @@ public class Comment
     public string UserName { get; private set; }
     public string Email { get; private set; }
     public string Message { get; private set; }
-    public CommentStatus Status { get; private set; }
+    public int Status { get; private set; }
     public DateTime CreationDate { get; private set; }
 
     // Comment hasOne Article
@@ -36,9 +36,9 @@ public class Comment
 }
 
 
-public enum CommentStatus
+public static class CommentStatus
 {
-    NewComment,
-    Confirmed,
-    Canceled
+    public static int NewComment => 0;
+    public static int Confirmed => 1;
+    public static int Canceled => 2;
 }
