@@ -12,8 +12,7 @@ public class Article
     public string? Content { get; private set; }
     public bool IsDeleted { get; private set; }
     public DateTime CreationDate { get; private set; }
-
-    // Reference relations
+    // ArticleCategory hasMany articles
     public long ArticleCategoryId { get; private set; }
     public ArticleCategory ArticleCategory { get; private set; }
 
