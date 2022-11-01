@@ -1,10 +1,12 @@
 ﻿using MB.Application;
 using MB.Application.Contracts.Article;
 using MB.Application.Contracts.ArticleCategory;
+using MB.Application.Contracts.Comment;
 using MB.Domain.ArticleAgg;
 using MB.Domain.ArticleAgg.Services;
 using MB.Domain.ArticleCategoryAgg;
 using MB.Domain.ArticleCategoryAgg.Services;
+using MB.Domain.CommentAgg;
 using MB.Infrastructure.EfCore;
 using MB.Infrastructure.EfCore.Repositories;
 using MB.Infrastructure.Query;
@@ -31,5 +33,8 @@ public class BootsTrapper
         services.AddScoped<IArticleValidatorService, ArticleValidatorService>();
 
         services.AddScoped<IArticleQuery, ArticleQuery>();
+
+        services.AddScoped<ICommentApplication, CommentApplication>();
+        services.AddScoped<ICommentRepository, CommentRepository>();
     }
 }

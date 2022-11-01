@@ -11,4 +11,10 @@ public class CommentApplication : ICommentApplication
     {
         _commentRepository = commentRepository;
     }
+
+    public void AddComment(AddComment command)
+    {
+        var comment = new Comment(command.Name, command.Email, command.Message, command.ArticleId);
+        _commentRepository.CreateComment(comment);
+    }
 }

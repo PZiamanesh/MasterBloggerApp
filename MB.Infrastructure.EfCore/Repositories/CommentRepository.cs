@@ -10,4 +10,15 @@ public class CommentRepository : ICommentRepository
     {
         _dbContext = dbContext;
     }
+
+    public void CreateComment(Comment comment)
+    {
+        _dbContext.Comments.Add(comment);
+        Save();
+    }
+
+    public void Save()
+    {
+        _dbContext.SaveChanges();
+    }
 }
