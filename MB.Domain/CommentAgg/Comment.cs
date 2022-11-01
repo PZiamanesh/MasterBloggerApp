@@ -10,7 +10,8 @@ public class Comment
     public string Message { get; private set; }
     public CommentStatus Status { get; private set; }
     public DateTime CreationDate { get; private set; }
-    // Article hasMany comments
+
+    // Comment hasOne Article
     public long ArticleId { get; private set; }
     public Article Article { get; private set; }
 

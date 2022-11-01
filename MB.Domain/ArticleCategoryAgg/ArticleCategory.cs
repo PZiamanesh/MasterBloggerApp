@@ -10,7 +10,7 @@ public class ArticleCategory
     public bool IsDeleted { get; private set; }
     public DateTime CreationDate { get; private set; }
 
-    // Reference relations
+    // ArticleCategory hasMany articles
     public List<Article> Articles { get; private set; }
 
     protected ArticleCategory()

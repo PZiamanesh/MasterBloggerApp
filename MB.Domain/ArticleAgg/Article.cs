@@ -1,5 +1,6 @@
 ﻿using MB.Domain.ArticleAgg.Services;
 using MB.Domain.ArticleCategoryAgg;
+using MB.Domain.CommentAgg;
 
 namespace MB.Domain.ArticleAgg;
 
@@ -12,9 +13,13 @@ public class Article
     public string? Content { get; private set; }
     public bool IsDeleted { get; private set; }
     public DateTime CreationDate { get; private set; }
-    // ArticleCategory hasMany articles
+
+    // Article hasOne articleCategory
     public long ArticleCategoryId { get; private set; }
     public ArticleCategory ArticleCategory { get; private set; }
+
+    // Article hasMany comments
+    public ICollection<Comment> Comments { get; private set; }
 
     protected Article()
     {
