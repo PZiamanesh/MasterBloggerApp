@@ -16,6 +16,7 @@ public class ArticleQuery : IArticleQuery
     public List<ArticleQueryView> GetArticles()
     {
         return _dbContext.Articles
+            .Where(x=>x.IsDeleted == false)
             .Select(x => new ArticleQueryView()
             {
                 Id = x.Id,
@@ -25,7 +26,8 @@ public class ArticleQuery : IArticleQuery
                 ShortDescription = x.ShortDescription,
                 CategoryName = x.ArticleCategory.Title,
                 CommentsCount = x.Comments.Count(x => x.Status == CommentStatus.Confirmed)
-            }).ToList();
+            })
+            .ToList();
     }
 
     public ArticleQueryView? GetArticle(long id)
