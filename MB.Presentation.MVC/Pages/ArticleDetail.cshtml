@@ -5,6 +5,17 @@
 
 <main class="post blog-post col-lg-8">
     <div class="container">
+        @if (TempData["CommentSuccess"] != null)
+        {
+            <div class="row-cols-4">
+                <p class="alert alert-success text-black">Thanks! Your comment will be posted after admins approval.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row-cols-4">
+            </div>
+        }
         <div class="post-single">
             <div class="post-thumbnail">
                 <img src="img/@Model.Article.Image" alt="@Model.Article.Title" class="img-fluid">
@@ -23,7 +34,9 @@
                 </h1>
                 <div class="post-footer d-flex align-items-center flex-column flex-sm-row">
                     <div class="d-flex align-items-center flex-wrap">
-                        <div class="date"><i class="icon-clock"></i>@Model.Article.CreationDate</div>
+                        <div class="date">
+                            <i class="icon-clock"></i>@Model.Article.CreationDate
+                        </div>
                         <div class="comments meta-last"><i class="icon-comment"></i>12</div>
                     </div>
                 </div>
@@ -35,53 +48,28 @@
 
                 <div class="post-comments">
                     <header>
-                        <h3 class="h6">Post Comments<span class="no-of-comments">(3)</span></h3>
+                        <h3 class="h6">Post Comments<span class="no-of-comments">(@Model.Article.CommentsCount)</span></h3>
                     </header>
-                    <div class="comment">
-                        <div class="comment-header d-flex justify-content-between">
-                            <div class="user d-flex align-items-center">
-                                <div class="image">
-                                    <img src="img/user.svg" alt="..." class="img-fluid rounded-circle">
-                                </div>
-                                <div class="title">
-                                    <strong>Jabi Hernandiz</strong><span class="date">May 2016</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="comment-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <div class="comment-header d-flex justify-content-between">
-                            <div class="user d-flex align-items-center">
-                                <div class="image">
-                                    <img src="img/user.svg" alt="..." class="img-fluid rounded-circle">
-                                </div>
-                                <div class="title">
-                                    <strong>Nikolas</strong><span class="date">May 2016</span>
+                    @foreach (var comment in Model.Article.comments)
+                    {
+                        <div class="comment">
+                            <div class="comment-header d-flex justify-content-between">
+                                <div class="user d-flex align-items-center">
+                                    <div class="image">
+                                        <img src="img/user.svg" alt="..." class="img-fluid rounded-circle">
+                                    </div>
+                                    <div class="title">
+                                        <strong>@comment.Name</strong><span class="date">@comment.CreationDate</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="comment-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        </div>
-                    </div>
-                    <div class="comment">
-                        <div class="comment-header d-flex justify-content-between">
-                            <div class="user d-flex align-items-center">
-                                <div class="image">
-                                    <img src="img/user.svg" alt="..." class="img-fluid rounded-circle">
-                                </div>
-                                <div class="title">
-                                    <strong>John Doe</strong><span class="date">May 2016</span>
-                                </div>
+                            <div class="comment-body">
+                                <p>
+                                    @comment.Message
+                                </p>
                             </div>
                         </div>
-                        <div class="comment-body">
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                        </div>
-                    </div>
+                    }
                 </div>
 
                 <div class="add-comment">

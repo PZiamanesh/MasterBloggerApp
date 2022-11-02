@@ -25,6 +25,7 @@ public class ArticleDetailModel : PageModel
     public RedirectToPageResult OnPost(AddComment command)
     {
         _commentApplication.AddComment(command);
+        TempData["CommentSuccess"] = "Done!";
         return RedirectToPage("./ArticleDetail", new { Id = command.ArticleId });
     }
 }
