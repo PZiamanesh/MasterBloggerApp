@@ -41,7 +41,7 @@ public class ArticleQuery : IArticleQuery
                 CategoryName = x.ArticleCategory.Title,
                 Content = x.Content,
                 CommentsCount = x.Comments.Count(x => x.Status == CommentStatus.Confirmed),
-                comments = x.Comments
+                Comments = x.Comments
                     .Where(x=>x.Status == CommentStatus.Confirmed)
                     .Select(x=> new CommentQueryView()
                 {
