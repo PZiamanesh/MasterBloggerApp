@@ -1,4 +1,5 @@
-﻿using MB.Application;
+﻿using _Framework.Infrastructure;
+using MB.Application;
 using MB.Application.Contracts.Article;
 using MB.Application.Contracts.ArticleCategory;
 using MB.Application.Contracts.Comment;
@@ -36,5 +37,7 @@ public class BootsTrapper
 
         services.AddScoped<ICommentApplication, CommentApplication>();
         services.AddScoped<ICommentRepository, CommentRepository>();
+
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
     }
 }

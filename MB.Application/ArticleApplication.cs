@@ -1,4 +1,5 @@
-﻿using MB.Application.Contracts.Article;
+﻿using _Framework.Infrastructure;
+using MB.Application.Contracts.Article;
 using MB.Domain.ArticleAgg;
 using MB.Domain.ArticleAgg.Services;
 
@@ -8,11 +9,13 @@ public class ArticleApplication : IArticleApplication
 {
     private readonly IArticleRepository _articleRepository;
     private readonly IArticleValidatorService _articleValidatorService;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public ArticleApplication(IArticleRepository articleRepository, IArticleValidatorService articleValidatorService)
+    public ArticleApplication(IArticleRepository articleRepository, IArticleValidatorService articleValidatorService, IUnitOfWork unitOfWork)
     {
         _articleRepository = articleRepository;
         _articleValidatorService = articleValidatorService;
+        _unitOfWork = unitOfWork;
     }
 
     public List<ArticleViewModel> List()
@@ -22,6 +25,8 @@ public class ArticleApplication : IArticleApplication
 
     public void CreateArticle(CreateNewArticle command)
     {
+        _unitOfWork.BeginTrans();
+
         var article = new Article(command.Title,
             command.ShortDescription,
             command.Image,
@@ -30,11 +35,14 @@ public class ArticleApplication : IArticleApplication
             _articleValidatorService);
 
         _articleRepository.Create(article);
+
+        _unitOfWork.CommitTrans();
     }
 
     public EditArticle GetArticle(long id)
     {
         Article? article = _articleRepository.Get(id);
+
         return new EditArticle()
         {
             Id = article.Id,
@@ -48,6 +56,8 @@ public class ArticleApplication : IArticleApplication
 
     public void EditArticle(EditArticle command)
     {
+        _unitOfWork.BeginTrans();
+
         var article = _articleRepository.Get(command.Id);
         article.Edit(command.Title,
             command.ShortDescription,
@@ -55,20 +65,26 @@ public class ArticleApplication : IArticleApplication
             command.Content,
             command.ArticleCategoryId);
 
-        //_articleRepository.Save();
+        _unitOfWork.CommitTrans();
     }
 
     public void RemoveArticle(long id)
     {
+        _unitOfWork.BeginTrans();
+
         var article = _articleRepository.Get(id);
         article.Remove();
-        //_articleRepository.Save();
+
+        _unitOfWork.CommitTrans();
     }
 
     public void ActivateArticle(long id)
     {
+        _unitOfWork.BeginTrans();
+
         var article = _articleRepository.Get(id);
         article.Activate();
-        //_articleRepository.Save();
+
+        _unitOfWork.CommitTrans();
     }
 }

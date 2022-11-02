@@ -1,4 +1,5 @@
-﻿using MB.Application.Contracts.Comment;
+﻿using _Framework.Infrastructure;
+using MB.Application.Contracts.Comment;
 using MB.Domain.CommentAgg;
 
 namespace MB.Application;
@@ -6,21 +7,26 @@ namespace MB.Application;
 public class CommentApplication : ICommentApplication
 {
     private readonly ICommentRepository _commentRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public CommentApplication(ICommentRepository commentRepository)
+    public CommentApplication(ICommentRepository commentRepository, IUnitOfWork unitOfWork)
     {
         _commentRepository = commentRepository;
+        _unitOfWork = unitOfWork;
     }
 
     public void AddComment(AddComment command)
     {
+        _unitOfWork.BeginTrans();
+
         var comment = new Comment(command.Name, command.Email, command.Message, command.ArticleId);
         _commentRepository.Create(comment);
+        _unitOfWork.CommitTrans();
     }
 
-    public List<CommentViewModel> GetComments()
+    public IEnumerable<CommentViewModel> GetComments()
     {
-        var comments = _commentRepository.GetAll();
+        var comments = _commentRepository.GetList();
         return comments.Select(x => new CommentViewModel()
         {
             Id = x.Id,
@@ -35,15 +41,19 @@ public class CommentApplication : ICommentApplication
 
     public void Confirm(long id)
     {
+        _unitOfWork.BeginTrans();
+
         var comment = _commentRepository.Get(id);
         comment.Confirm();
-        //_commentRepository.Save();
+        _unitOfWork.CommitTrans();
     }
 
     public void Cancel(long id)
     {
+        _unitOfWork.BeginTrans();
+
         var comment = _commentRepository.Get(id);
         comment.Cancel();
-        //_commentRepository.Save();
+        _unitOfWork.CommitTrans();
     }
 }
