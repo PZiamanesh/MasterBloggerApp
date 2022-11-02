@@ -1,9 +1,8 @@
-﻿namespace MB.Domain.CommentAgg;
+﻿using _Framework.Infrastructure;
 
-public interface ICommentRepository
+namespace MB.Domain.CommentAgg;
+
+public interface ICommentRepository : IRepository<long, Comment>
 {
-    void CreateComment(Comment comment);
-    List<Comment> GetAll();
-    Comment Get(long id);
-    void Save();
+    List<Comment> GetList();
 }

@@ -1,35 +1,22 @@
-﻿using MB.Domain.CommentAgg;
+﻿using _Framework.Infrastructure;
+using MB.Domain.CommentAgg;
 using Microsoft.EntityFrameworkCore;
 
 namespace MB.Infrastructure.EfCore.Repositories;
 
-public class CommentRepository : ICommentRepository
+public class CommentRepository : BaseRepository<long, Comment>, ICommentRepository
 {
     private readonly MasterBlogDbContext _dbContext;
 
-    public CommentRepository(MasterBlogDbContext dbContext)
+    public CommentRepository(MasterBlogDbContext dbContext) : base(dbContext)
     {
         _dbContext = dbContext;
     }
 
-    public void CreateComment(Comment comment)
+    public List<Comment> GetList()
     {
-        _dbContext.Comments.Add(comment);
-        Save();
-    }
-
-    public List<Comment> GetAll()
-    {
-        return _dbContext.Comments.Include(x=>x.Article).ToList();
-    }
-
-    public Comment Get(long id)
-    {
-        return _dbContext.Comments.FirstOrDefault(x => x.Id == id);
-    }
-
-    public void Save()
-    {
-        _dbContext.SaveChanges();
+        return _dbContext.Comments
+            .Include(x => x.Article)
+            .ToList();
     }
 }

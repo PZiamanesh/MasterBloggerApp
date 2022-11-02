@@ -7,6 +7,6 @@ public interface IRepository<in TKey, TEntity> where TEntity : DomainBase<TKey>
 {
     void Create(TEntity entity);
     IEnumerable<TEntity> GetAll();
-    TEntity Get(TKey key);
+    TEntity? Get(TKey id);
     bool Exist(Expression<Func<TEntity, bool>> expression);
 }

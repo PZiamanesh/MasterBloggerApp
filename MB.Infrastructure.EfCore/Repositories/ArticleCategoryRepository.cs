@@ -1,39 +1,14 @@
-﻿using MB.Domain.ArticleCategoryAgg;
+﻿using _Framework.Infrastructure;
+using MB.Domain.ArticleCategoryAgg;
 
 namespace MB.Infrastructure.EfCore.Repositories;
 
-public class ArticleCategoryRepository : IArticleCategoryRepository
+public class ArticleCategoryRepository : BaseRepository<long,ArticleCategory>, IArticleCategoryRepository
 {
     private readonly MasterBlogDbContext _dbContext;
 
-    public ArticleCategoryRepository(MasterBlogDbContext dbContext)
+    public ArticleCategoryRepository(MasterBlogDbContext dbContext) : base(dbContext)
     {
         _dbContext = dbContext;
-    }
-
-    public List<ArticleCategory> GetAll()
-    {
-        return _dbContext.ArticleCategories.OrderByDescending(x => x.Id).ToList();
-    }
-
-    public void Add(ArticleCategory entity)
-    {
-        _dbContext.Add(entity);
-        Save();
-    }
-
-    public ArticleCategory Get(long id)
-    {
-        return _dbContext.ArticleCategories.Find(id) ?? _dbContext.ArticleCategories.First();
-    }
-
-    public void Save()
-    {
-        _dbContext.SaveChanges();
-    }
-
-    public bool Exists(string title)
-    {
-        return _dbContext.ArticleCategories.Any(x => x.Title == title);
     }
 }

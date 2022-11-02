@@ -13,7 +13,7 @@ public class ArticleValidatorService : IArticleValidatorService
 
     public void IsArticleTitleDuplicated(string title)
     {
-        if (_articleRepository.IsArticleExist(title))
+        if (_articleRepository.Exist(x=>x.Title == title))
             throw new DuplicatedRecordException("A record with this title already exist.");
     }
 }

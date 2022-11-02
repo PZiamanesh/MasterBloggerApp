@@ -17,7 +17,7 @@ public class ArticleApplication : IArticleApplication
 
     public List<ArticleViewModel> List()
     {
-        return _articleRepository.GetAll();
+        return _articleRepository.GetList();
     }
 
     public void CreateArticle(CreateNewArticle command)
@@ -34,7 +34,7 @@ public class ArticleApplication : IArticleApplication
 
     public EditArticle GetArticle(long id)
     {
-        Article article = _articleRepository.Get(id);
+        Article? article = _articleRepository.Get(id);
         return new EditArticle()
         {
             Id = article.Id,
@@ -55,20 +55,20 @@ public class ArticleApplication : IArticleApplication
             command.Content,
             command.ArticleCategoryId);
 
-        _articleRepository.Save();
+        //_articleRepository.Save();
     }
 
     public void RemoveArticle(long id)
     {
         var article = _articleRepository.Get(id);
         article.Remove();
-        _articleRepository.Save();
+        //_articleRepository.Save();
     }
 
     public void ActivateArticle(long id)
     {
         var article = _articleRepository.Get(id);
         article.Activate();
-        _articleRepository.Save();
+        //_articleRepository.Save();
     }
 }
