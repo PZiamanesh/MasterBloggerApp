@@ -7,7 +7,7 @@ namespace MB.Presentation.MVC.Areas.Administrator.Pages.CommentManagement;
 public class ListModel : PageModel
 {
     private readonly ICommentApplication _commentApplication;
-    public List<CommentViewModel> Comments { get; set; }
+    public IEnumerable<CommentViewModel> Comments { get; set; }
 
     public ListModel(ICommentApplication commentApplication)
     {

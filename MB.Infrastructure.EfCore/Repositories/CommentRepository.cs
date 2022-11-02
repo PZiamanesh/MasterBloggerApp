@@ -13,7 +13,7 @@ public class CommentRepository : BaseRepository<long, Comment>, ICommentReposito
         _dbContext = dbContext;
     }
 
-    public List<Comment> GetList()
+    public IEnumerable<Comment> GetList()
     {
         return _dbContext.Comments
             .Include(x => x.Article)
