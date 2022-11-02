@@ -23,6 +23,11 @@ public class CommentRepository : ICommentRepository
         return _dbContext.Comments.Include(x=>x.Article).ToList();
     }
 
+    public Comment Get(long id)
+    {
+        return _dbContext.Comments.FirstOrDefault(x => x.Id == id);
+    }
+
     public void Save()
     {
         _dbContext.SaveChanges();

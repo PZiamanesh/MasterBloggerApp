@@ -33,6 +33,11 @@ public class Comment
     {
         Status = CommentStatus.Confirmed;
     }
+
+    public void Cancel()
+    {
+        Status = CommentStatus.Canceled;
+    }
 }
 
 
