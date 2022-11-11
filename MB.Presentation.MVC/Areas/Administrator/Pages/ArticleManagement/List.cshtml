@@ -46,14 +46,14 @@
                             {
                                 <form class="float-left mr-2" method="post" asp-page-handler="Activate">
                                     <button class="btn btn-success btn-sm">Activate</button>
-                                    <input type="hidden" name="id" value="@article.Id"/>
+                                    <input type="hidden" name="id" value="@article.Id" />
                                 </form>
                             }
                             else
                             {
                                 <form class="float-left mr-2" method="post" asp-page-handler="Remove">
                                     <button class="btn btn-danger btn-sm">Remove</button>
-                                    <input type="hidden" name="id" value="@article.Id"/>
+                                    <input type="hidden" name="id" value="@article.Id" />
                                 </form>
                             }
                         </td>
